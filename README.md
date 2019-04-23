@@ -22,6 +22,8 @@ Pour installer Ansible sur votre machine : [https://docs.ansible.com/ansible/lat
 * Dans `/playbook/roles/wordpress/defaults/main.yml`
 	 * [x] IP `wp_db_host`
 	 * [x] IP Privé `VM Wordpress`
+* Dans `/playbook/roles/mysql/defaults/main.yml`
+	* [x] IP `wp_private_host`
 
 ## Lancement
 
