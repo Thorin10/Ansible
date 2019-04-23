@@ -27,7 +27,7 @@ Pour installer Ansible sur votre machine : [https://docs.ansible.com/ansible/lat
 
 Pour lancer l'installation par les playbooks utilisez:
 
-    `ansible-playbook playbooks/playbook.yml -i ./inventory.ini`
+    `ansible-playbook playbooks/playbook.yml -i ./host.ini`
 
 ---
 
