@@ -1,0 +1,4 @@
+mysql_user_name: wordpress
+wp_db_name: wp_database
+mysql_user_password: azertyui0p
+wp_db_host: 10.0.0.4
