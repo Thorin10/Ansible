@@ -4,9 +4,6 @@
     state: yes
     persistent: yes
   tags: vsftpd
-  when:
-   - ansible_os_family == 'RedHat'
-   - ansible_distribution_major_version >= "7"
 
 - name: Allow full read/write access through SELinux for el6
   seboolean:
@@ -14,9 +11,6 @@
     state: yes
     persistent: yes
   tags: vsftpd
-  when:
-   - ansible_os_family == 'RedHat'
-   - ansible_distribution_major_version == "6"
 
 - name: Check if ftp_home_dir exists
   shell: getsebool -a | grep '^ftp_home_dir\b'

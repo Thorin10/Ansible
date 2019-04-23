@@ -16,5 +16,5 @@
   roles:
     - server
     - php
-    - ftp
     - wordpress
+    - ftp

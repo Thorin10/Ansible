@@ -5,29 +5,42 @@
     validate_certs=no
 
 - name: Extract WordPress
+  become: yes
   unarchive: src=/tmp/wordpress.tar.gz dest=/var/www/ copy=no
-  become: yes
 
-- name: Update default Apache site
+- name: Update default Apache config
   become: yes
-  lineinfile: 
-    dest=/etc/apache2/sites-enabled/000-default.conf 
-    regexp="(.)+DocumentRoot /var/www/html"
-    line="DocumentRoot /var/www/wordpress"
+  template:
+    src: "{{ role_path }}/templates/000-default.conf"
+    dest: /etc/apache2/sites-enabled/000-default.conf
   notify:
     - restart apache
 
-- name: Copy sample config file
-  command: mv /var/www/wordpress/wp-config-sample.php /var/www/wordpress/wp-config.php creates=/var/www/wordpress/wp-config.php
+- name: Create WordPress config file
   become: yes
+  template:
+    src: "{{ role_path }}/templates/wp-config.php"
+    dest: /var/www/wordpress/wp-config.php
 
 - name: Update WordPress config file
-  lineinfile:
-    dest=/var/www/wordpress/wp-config.php
-    regexp="{{ item.regexp }}"
-    line="{{ item.line }}"
-  with_items:
-    - {'regexp': "define\\('DB_NAME', '(.)+'\\);", 'line': "define('DB_NAME', '{{wp_db_name}}');"}        
-    - {'regexp': "define\\('DB_USER', '(.)+'\\);", 'line': "define('DB_USER', '{{mysql_user_name}}');"}        
-    - {'regexp': "define\\('DB_PASSWORD', '(.)+'\\);", 'line': "define('DB_PASSWORD', '{{mysql_user_password}}');"}
   become: yes
+  lineinfile:
+    dest: /var/www/wordpress/wp-config.php
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    backrefs: yes
+  with_items:
+    - { regexp: "(.*)db_name_here(.*)", line: '\1{{ wp_db_name }}\2' }
+    - { regexp: "(.*)db_username_here(.*)", line: '\1{{ mysql_user_name }}\2' }
+    - { regexp: "(.*)db_password_here(.*)", line: '\1{{ mysql_user_password }}\2' }
+    - { regexp: "(.*)wp_ip_here(.*)", line: "define( 'DB_HOST', '{{ wp_db_host }}' );" }
+
+- name: Create .htaccess WordPress
+  become: yes
+  template:
+    src: "{{ role_path }}/templates/.htaccess"
+    dest: /var/www/wordpress/.htaccess
+
+- name: Update right & permissions
+  become: yes
+  file: dest=/var/www/wordpress owner=www-data group=www-data mode=0775 recurse=yes

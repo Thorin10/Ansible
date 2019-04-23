@@ -1,4 +1,4 @@
-- name: Ensure `listen` and `listen_ipv6` are mutually exclusive
+- name: Check `listen` and `listen_ipv6` are mutually exclusive
   assert:
     that: "vsftpd_listen != vsftpd_listen_ipv6"
   tags: vsftpd
@@ -19,7 +19,7 @@
 - include_tasks: selinux.yml
   when: ansible_selinux is defined and ansible_selinux != false and ansible_selinux.status == 'enabled'
 
-- name: Ensure `anon_root` exists
+- name: Check `anon_root` exists
   file:
     path: '{{ vsftpd_anon_root }}'
     state: directory
@@ -30,7 +30,7 @@
   when: vsftpd_anon_root is defined
   tags: vsftpd
 
-- name: Ensure `local_root` exists
+- name: Check `local_root` exists
   file:
     path: '{{ vsftpd_local_root }}'
     state: directory
@@ -59,7 +59,7 @@
   when: vsftpd_extra_permissions is defined
   tags: vsftpd
 
-- name: Ensure service is started
+- name: Check service is started
   service:
     name: '{{ vsftpd_service }}'
     state: started
