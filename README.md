@@ -13,7 +13,7 @@ Pour installer Ansible sur votre machine : [https://docs.ansible.com/ansible/lat
  * [X] **ansible_host:**  IP public des machines
 
 * Dans `/ansible.cfg` & `/playbook/playbook.yml`
-	 - [X] **remote_user = **le nom de votre utilisateur des machines.
+	 - [X] **remote_user** = **le nom de votre utilisateur des machines**.
  
 * Dans `/playbook/roles/mysql/tasks/main.yml` 
 	* **Create wordpress user** 
