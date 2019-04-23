@@ -12,7 +12,6 @@
     - mysql
 
 - hosts: web
-
   roles:
     - server
     - php

@@ -34,7 +34,7 @@
   mysql_user:
     name: wordpress
     password: azertyui0p
-    host: '10.1.0.6'
+    host: '10.0.0.6'
     priv: '*.*:ALL,GRANT'
     state: present
 
