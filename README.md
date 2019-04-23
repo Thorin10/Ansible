@@ -9,15 +9,19 @@ Pour installer Ansible sur votre machine : [https://docs.ansible.com/ansible/lat
 
 ## Modification
 
-Dans le dossier host_vars vous devez modifier les `ansible_host: ` pour mettre les ip public de vos machines.
+* Dans le dossier `/host_vars/`
+ * [X] **ansible_host:**  IP public des machines
 
-Dans ansible.cfg il faut modifier le `remote_user = ` par le nom de votre utilisateur de vos machines.
+* Dans `/ansible.cfg` & `/playbook/playbook.yml`
+	 - [X] **remote_user = ** le nom de votre utilisateur des machines.
+ 
+* Dans `/playbook/roles/mysql/tasks/main.yml` 
+	* **Create wordpress user** 
+		 * [x] `host` =  l'ip **privé** de votre VM Database.
 
-Dans /playbook/playbook.yml il faut modifier le `remote_user = ` par le nom de votre utilisateur de vos machines.
-
-Dans /playbook/roles/mysql/tasks/main.yml pour l 'étape **Create wordpress user** l 'ip de "host" est l'ip privé de votre VM Database.
-
-Dans /playbook/roles/wordpress/defaults/main.ym. L 'ip de "wp_db_host" est l'ip privé de votre VM Wordpress.
+* Dans `/playbook/roles/wordpress/defaults/main.yml`
+	 * [x] IP `wp_db_host`
+	 * [x] IP Privé `VM Wordpress`
 
 ## Lancement
 
@@ -26,3 +30,7 @@ Pour lancer l'installation par les playbooks utilisez:
     `ansible-playbook /playbook/playbook.yml -i ./inventory.ini`
 
 ---
+
+**Vous avez donc maintenant accès à Wordpress depuis votre VM Apache avec l'IP public de cette dernière**
+
+
