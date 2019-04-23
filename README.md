@@ -8,6 +8,7 @@ Pour installer Ansible sur votre machine : [https://docs.ansible.com/ansible/lat
 
 
 ## Modification
+* Dans le fichier **ansible.cfg** modifier `private_key_file` par votre clée privée ssh
 
 * Dans le dossier `/host_vars/`
  	* [X] **ansible_host:**  IP public des machines
