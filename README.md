@@ -10,7 +10,7 @@ Pour installer Ansible sur votre machine : [https://docs.ansible.com/ansible/lat
 ## Modification
 
 * Dans le dossier `/host_vars/`
- * [X] **ansible_host:**  IP public des machines
+ 	* [X] **ansible_host:**  IP public des machines
 
 * Dans `/ansible.cfg` & `/playbook/playbook.yml`
 	 - [X] `remote_user` = **le nom de votre utilisateur des machines**.
